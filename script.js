@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     // Create function that displays current date
     var today = new Date();
-    var date = (today.getMonth() + 1) + '/' + today.getDate(); +'/' + today.getFullYear();
+    var date = (today.getMonth() + 1) + '/' + today.getDate(); +'//' + today.getFullYear();
     // show the date
     $(".today").html(date);
     // create function that displays current time
@@ -46,19 +46,36 @@ $(document).ready(function () {
         });
     };
 
+ function showEvents() {
+var savedTasks = localStorage.getItem("task")
+var savedTime = localStorage.getItem("timeoftask")
+console.log(savedTasks);
+console.log(savedTime);
 
+ };
     // Add click event to each timeslot, that allows user to add a new text to the time slot with custom text.
-    $(".event").each(function (el, element) {
-        $(".lock").on("click", function () {
-                var task = $(".input").val();
-                console.log($(".input").val());
-                $(".event").append(" " + "*" + task + " ");
+    // $(".rounded").each(function (el, element) {
+    
+    $(".lock").on("click", function () {
+        var storeTask = (taskTime , task);
+        console.log(storeTask);
+        var task = $(this).prev().find(".input").val();
+        var taskTime = $(this).prev("id");
+                console.log(storeTask);
+                $(this).prev().append(" " + "task:" +" "+ task + " ");
+                localStorage.setItem( 1, storeTask) 
+                // console.log(localStorage);
+                // console.log(localStorage.getItem("task"));          
+                $(".input").val("");
             });
-        });
         // clicking save button saves the content of the event div to local storage
         // if there is no content, button does not fire
+        // });
 
-
-        console.log($(".input").val)
+        $(".newDay").on("click" , function(){
+            localStorage.clear();
+            location.reload();
+        });
         colorTime();
+        showEvents();
     });
